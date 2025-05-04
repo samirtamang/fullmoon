@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Full Moon Japanese Language School</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+        })();
+    </script>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="imagelogo.png" alt="Full Moon Logo" class="nav-logo">
+        </a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="page-wrapper">
+        <!-- Enhanced Hero Section -->
+        <section class="contact-hero enhanced-hero">
+            <div class="contact-hero-overlay">
+                <h1>Contact Us</h1>
+                <p>We’re here to help you. Reach out for a free consultation or any queries.</p>
+            </div>
+        </section>
+        <section class="contact-main enhanced-contact-main">
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <input type="text" name="name" id="name" placeholder="Your Name" required />
+                    <input type="email" name="email" id="email" placeholder="Your Email" required />
+                </div>
+                <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+                <div id="form-status" style="margin-top:10px;font-weight:bold;"></div>
+            </form>
+            <div class="contact-details">
+                <h2>Our Office</h2>
+                <p>
+                    <img src="https://img.icons8.com/ios-filled/24/2a5298/marker.png" alt="Location" class="icon">
+                    Banepa, Kavrepalanchok, Nepal
+                </p>
+                <p>
+                    <img src="https://img.icons8.com/ios-filled/24/2a5298/new-post.png" alt="Email" class="icon">
+                    info@fullmoonjapan.com
+                </p>
+                <p>
+                    <img src="https://img.icons8.com/ios-filled/24/2a5298/phone.png" alt="Phone" class="icon">
+                    +977 9813753317
+                </p>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps?q=Banepa,+Nepal&output=embed"
+                        width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        &copy; 2024 Full Moon Japanese Language School. All rights reserved.
+    </footer>
+    <script>
+        // EmailJS form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var status = document.getElementById('form-status');
+            status.textContent = "Sending...";
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            })
+            .then(function(response) {
+                status.style.color = "green";
+                status.textContent = "Message sent successfully!";
+                document.getElementById('contactForm').reset();
+            }, function(error) {
+                status.style.color = "red";
+                status.textContent = "Failed to send message. Please try again later.";
+            });
+        });
+    </script>
+</body>
+</html>
